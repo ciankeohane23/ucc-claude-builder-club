@@ -29,7 +29,7 @@ export default function Header() {
           />
           <div className="flex flex-col leading-tight">
             <span className="font-sans text-xs font-bold tracking-tight text-foreground sm:text-sm md:text-base">
-              University of Texas at Austin
+              University College Cork
             </span>
             <span className="text-[10px] font-semibold tracking-wide text-primary sm:text-xs md:text-sm">
               Claude Builder Club
