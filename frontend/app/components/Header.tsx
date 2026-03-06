@@ -20,19 +20,19 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-surface">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-8 sm:py-2.5 md:px-12">
         <Link href="/" className="group flex items-center gap-1.5 sm:gap-2">
-          <Image
-            src="/images/claude_logo.svg"
-            alt="Claude logo"
-            width={28}
-            height={28}
-            className="h-5 w-5 transition-transform duration-300 ease-out group-hover:rotate-12 sm:h-6 sm:w-6 md:h-7 md:w-7"
-          />
+   <Image
+  src="/images/ucc-logo.png"
+  alt="UCC logo"
+  width={120}
+  height={40}
+  className="transition-transform duration-300 ease-out group-hover:rotate-12"
+/>
           <div className="flex flex-col leading-tight">
             <span className="font-sans text-xs font-bold tracking-tight text-foreground sm:text-sm md:text-base">
               University College Cork
             </span>
             <span className="text-[10px] font-semibold tracking-wide text-primary sm:text-xs md:text-sm">
-              Claude Builder Club
+              Claude Builders Club
             </span>
           </div>
         </Link>
