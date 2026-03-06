@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="mx-auto flex min-h-[78vh] max-w-7xl flex-col items-center gap-10 px-4 pb-24 pt-6 sm:px-8 sm:pb-24 sm:pt-10 md:min-h-[82vh] md:flex-row md:items-center">
+    <section className="mx-auto flex min-h-[90vh] max-w-7xl flex-col items-center gap-10 px-4 pb-24 pt-6 sm:px-8 sm:pb-24 sm:pt-10 md:min-h-[82vh] md:flex-row md:items-center">
       <div className="flex flex-1 flex-col items-center text-center md:items-start md:text-left">
         <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl md:text-6xl">
   UCC Claude Builders Club
