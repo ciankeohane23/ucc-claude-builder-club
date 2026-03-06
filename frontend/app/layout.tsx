@@ -11,7 +11,7 @@ const sourceSerif = Source_Serif_4({
 export const metadata: Metadata = {
   title: "UCC Claude Builders Club",
   description:
-    "University College Cork Claude Builders Club — Learn AI, build projects, and collaborate with students exploring the future of AI.
+    "University College Cork Claude Builders Club – Learn AI, build projects, and collaborate with students exploring the future of AI.",
   icons: {
     icon: "/images/claude_logo.svg",
   },
