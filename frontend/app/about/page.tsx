@@ -36,10 +36,11 @@ export default function AboutPage() {
               </a>
             </div>
             <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-relaxed text-foreground/70 sm:mt-6 sm:text-base md:text-lg">
-              The Claude Builders Club at University College Cork is dedicated to fostering a community of
-              students passionate about artificial intelligence. We provide hands-on experience
-              with cutting-edge AI tools, connect students with industry opportunities, and
-              create a space for innovation and collaboration.
+              The Claude Builders Club at University College Cork is dedicated to fostering a
+community of students passionate about artificial intelligence. We provide
+hands-on experience with modern AI tools, host workshops and hackathons, and
+create a space where students can experiment, collaborate, and build exciting
+projects together.
             </p>
           </div>
         </section>
