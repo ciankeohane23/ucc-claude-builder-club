@@ -11,10 +11,10 @@ export default function AboutPage() {
         {/* Page Hero */}
         <section className="bg-surface px-4 py-10 text-center sm:px-8 sm:py-16 md:py-20">
           <h1 className="text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl lg:text-5xl">
-            About the Claude Builder Club
+            About the UCC Claude Builders Club
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-foreground/70 sm:mt-6 sm:text-base md:text-lg">
-            Empowering UT Austin students to build the future with AI
+            Empowering UCC students to build the future with AI
           </p>
         </section>
 
@@ -36,7 +36,7 @@ export default function AboutPage() {
               </a>
             </div>
             <p className="mx-auto mt-4 max-w-3xl text-center text-sm leading-relaxed text-foreground/70 sm:mt-6 sm:text-base md:text-lg">
-              The Claude Builder Club at UT Austin is dedicated to fostering a community of
+              The Claude Builders Club at University College Cork is dedicated to fostering a community of
               students passionate about artificial intelligence. We provide hands-on experience
               with cutting-edge AI tools, connect students with industry opportunities, and
               create a space for innovation and collaboration.
