@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="bg-primary">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 sm:px-8 sm:py-6 md:flex-row md:px-12">
         <p className="text-xs text-cream sm:text-sm md:text-base">
-          &copy; {new Date().getFullYear()} University College Cork Claude Builder Club
+          &copy; {new Date().getFullYear()} University College Cork Claude Builders Club
         </p>
 
         <div className="flex items-center gap-2 sm:gap-3">
