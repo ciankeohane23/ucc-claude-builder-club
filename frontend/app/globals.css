@@ -11,6 +11,17 @@
   --color-cream: #f4f3ee;
 }
 
+.dark {
+  --background: #1a1917;
+  --foreground: #f0ede8;
+  --color-primary: #d4783a;
+  --color-primary-dark: #c15f3c;
+  --color-primary-light: #e08c52;
+  --color-muted: #6b6760;
+  --color-surface: #252320;
+  --color-cream: #1e1d1a;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

@@ -118,6 +118,10 @@ function detectIsFlagship(event: GoogleCalendarEvent): boolean {
   return FLAGSHIP_KEYWORDS.some((keyword) => combined.includes(keyword));
 }
 
+function stripHtml(html: string): string {
+  return html.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').trim();
+}
+
 function formatTime(dateString: string): string {
   const date = new Date(dateString);
   return date.toLocaleTimeString("en-US", {
@@ -142,7 +146,7 @@ function parseGoogleEvent(event: GoogleCalendarEvent): CalendarEvent {
     endTime: isAllDay ? "" : formatTime(endDateTime),
     location: event.location || "TBA",
     type: detectEventType(event),
-    description: event.description || "No description provided.",
+    description: event.description ? stripHtml(event.description) : "No description provided.",
     isFlagship: detectIsFlagship(event),
   };
 }

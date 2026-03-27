@@ -3,7 +3,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
+import { useTheme } from "./ThemeProvider";
 
 const navLinks = [
   { label: "About", href: "/about" },
@@ -15,6 +16,7 @@ const navLinks = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme, toggle } = useTheme();
 
   return (
     <header className="sticky top-0 z-50 bg-surface">
@@ -49,20 +51,36 @@ export default function Header() {
               <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300 ease-out group-hover:w-full" />
             </Link>
           ))}
+          <button
+            onClick={toggle}
+            className="flex h-8 w-8 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-cream hover:text-foreground"
+            aria-label="Toggle dark mode"
+          >
+            {theme === "dark" ? <FaSun className="h-4 w-4" /> : <FaMoon className="h-4 w-4" />}
+          </button>
         </nav>
 
         {/* Mobile Menu Button */}
-        <button
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="flex h-10 w-10 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-cream hover:text-foreground md:hidden"
-          aria-label="Toggle menu"
-        >
-          {mobileMenuOpen ? (
-            <FaTimes className="h-5 w-5" />
-          ) : (
-            <FaBars className="h-5 w-5" />
-          )}
-        </button>
+        <div className="flex items-center gap-1 md:hidden">
+          <button
+            onClick={toggle}
+            className="flex h-10 w-10 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-cream hover:text-foreground"
+            aria-label="Toggle dark mode"
+          >
+            {theme === "dark" ? <FaSun className="h-4 w-4" /> : <FaMoon className="h-4 w-4" />}
+          </button>
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex h-10 w-10 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-cream hover:text-foreground"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <FaTimes className="h-5 w-5" />
+            ) : (
+              <FaBars className="h-5 w-5" />
+            )}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Navigation Menu */}
