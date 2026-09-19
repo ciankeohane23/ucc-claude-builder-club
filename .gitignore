@@ -1,2 +1,6 @@
 .claude
 .next/
+# Secrets — never commit
+.env
+.env.local
+.env*.local

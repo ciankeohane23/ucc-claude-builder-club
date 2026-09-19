@@ -36,7 +36,11 @@ Key facts about the club:
 - Check the Events page for upcoming meetings and hackathons
 
 Only answer questions related to the club, AI, or getting started with Claude/programming.
-For anything unrelated, politely redirect back to club topics.`;
+For anything unrelated, politely redirect back to club topics.
+
+Reply in plain text. The chat window prints your answer exactly as written, so markdown
+does not render: asterisks around a word show up as asterisks. No **bold**, no headings,
+no bullet points.`;
 
 export async function POST(req: NextRequest) {
   const ip = req.headers.get("x-forwarded-for") ?? req.headers.get("x-real-ip") ?? "unknown";
