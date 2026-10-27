@@ -66,7 +66,7 @@ export default function EventsPage() {
                   <ComingSoonCard />
                 </Reveal>
               )}
-              {!loading && error && (
+              {!loading && error && upcoming.length === 0 && past.length === 0 && (
                 <p className="text-sm text-foreground/60">
                   We couldn&apos;t load the events calendar just now. Please try again later.
                 </p>

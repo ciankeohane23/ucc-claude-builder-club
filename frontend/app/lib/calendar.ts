@@ -16,6 +16,7 @@ export interface CalendarEvent {
   isFlagship: boolean;
   image?: string;
   link?: string;
+  tags?: string[];
 }
 
 export type EventType =
@@ -125,7 +126,7 @@ function stripHtml(html: string): string {
   return html.replace(/<[^>]*>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').trim();
 }
 
-function formatTime(dateString: string): string {
+export function formatTime(dateString: string): string {
   const date = new Date(dateString);
   return date.toLocaleTimeString("en-IE", {
     hour: "numeric",
