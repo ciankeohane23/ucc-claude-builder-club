@@ -2,7 +2,7 @@
 
 The website for the Claude Builders Club at University College Cork: a student community learning and building with Claude.
 
-Live site: https://ucc-claude-builders.vercel.app
+Live site: https://www.claudebuildersucc.ie (also at https://ucc-claude-builders.vercel.app)
 
 ## Pages
 
@@ -40,7 +40,7 @@ bun run dev
 
 Environment variables (also set these in the Vercel project settings):
 
-- `NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY`: a Google Cloud API key with the Calendar API enabled. Restrict it to the site's domain, because it is visible in the browser.
+- `NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY`: a Google Cloud API key with the Calendar API enabled. It is visible in the browser, so restrict it to the site's addresses (`claudebuildersucc.ie/*`, `www.claudebuildersucc.ie/*` and `ucc-claude-builders.vercel.app/*`).
 - `NEXT_PUBLIC_GOOGLE_CALENDAR_ID`: the club calendar's ID (Google Calendar settings, "Integrate calendar"). The calendar must be public.
 - `ANTHROPIC_API_KEY`: for the club assistant chatbot. Server-side only.
 
@@ -49,6 +49,8 @@ Never commit `.env.local`.
 ## Deploying
 
 Vercel deploys `main` automatically (root directory `frontend`). Pull requests get a preview deployment.
+
+The domain `claudebuildersucc.ie` is registered with Blacknight and uses Vercel's nameservers (`ns1.vercel-dns.com`, `ns2.vercel-dns.com`), so DNS records are managed in Vercel. `www.claudebuildersucc.ie` is the main address and `claudebuildersucc.ie` redirects to it. It renews every October.
 
 ## Credits
 
