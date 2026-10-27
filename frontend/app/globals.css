@@ -1,25 +1,35 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #f4f3ee;
+  --background: #f1efec;
   --foreground: #1a1a1a;
-  --color-primary: #c15f3c;
-  --color-primary-dark: #a84f31;
-  --color-primary-light: #d4783a;
+  --color-primary: #b85937;
+  --color-primary-dark: #9c4829;
+  --color-primary-light: #d4825f;
   --color-muted: #b1ada1;
-  --color-surface: #ffffff;
-  --color-cream: #f4f3ee;
+  --color-surface: #faf8f5;
+  --color-cream: #ebe6df;
+  --color-kraft: #e8d4bf;
+  --color-ink: #12151d;
+  --color-ink-surface: #1b1f29;
+  --color-on-ink: #f1efec;
 }
 
 .dark {
-  --background: #1a1917;
+  --background: #16171b;
   --foreground: #f0ede8;
-  --color-primary: #d4783a;
+  --color-primary: #d97757;
   --color-primary-dark: #c15f3c;
-  --color-primary-light: #e08c52;
+  --color-primary-light: #e8957a;
   --color-muted: #6b6760;
-  --color-surface: #252320;
-  --color-cream: #1e1d1a;
+  --color-surface: #1f2026;
+  --color-cream: #1b1c21;
+  --color-kraft: #4a3529;
+  --color-ink: #0d0e12;
+  --color-ink-surface: #181a21;
+  --color-on-ink: #f0ede8;
 }
 
 @theme inline {
@@ -31,13 +41,196 @@
   --color-muted: var(--color-muted);
   --color-surface: var(--color-surface);
   --color-cream: var(--color-cream);
+  --color-kraft: var(--color-kraft);
+  --color-ink: var(--color-ink);
+  --color-ink-surface: var(--color-ink-surface);
+  --color-on-ink: var(--color-on-ink);
   --font-sans: var(--font-serif);
+  --font-display: var(--font-lora);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-serif), Georgia, "Times New Roman", serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-lora), Georgia, serif;
+}
+
+/* Shared layout + surfaces */
+.container-wide {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+}
+
+@media (min-width: 64rem) {
+  .container-wide {
+    padding-inline: 2rem;
+  }
+}
+
+.text-display {
+  font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.shadow-lift {
+  box-shadow: 0 10px 30px -12px rgb(18 21 29 / 0.18);
+}
+
+.shadow-lift-lg {
+  box-shadow: 0 30px 70px -24px rgb(18 21 29 / 0.32);
+}
+
+.dark .shadow-lift,
+.dark .shadow-lift-lg {
+  box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.6);
+}
+
+.card-soft {
+  background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-kraft) 70%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+/* Warm wash behind the hero */
+.hero-wash {
+  background:
+    radial-gradient(60% 70% at 85% 0%, color-mix(in srgb, var(--color-primary) 22%, transparent), transparent 70%),
+    radial-gradient(45% 50% at 100% 60%, color-mix(in srgb, var(--color-kraft) 55%, transparent), transparent 70%);
+}
+
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.08); }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 6s ease-in-out infinite;
+}
+
+/* Scroll reveal (see components/Reveal.tsx) */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* On-load entrance for the hero (pure CSS, so it doesn't wait for JavaScript) */
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+.rise-in {
+  animation: rise-in 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* Hero animation (see components/HeroAnimation.tsx) */
+@keyframes draw-line {
+  0% { stroke-dashoffset: 1; opacity: 1; }
+  22% { stroke-dashoffset: 0; }
+  82% { stroke-dashoffset: 0; opacity: 1; }
+  94%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+@keyframes pop-node {
+  0% { transform: scale(0); }
+  8% { transform: scale(1.18); }
+  13% { transform: scale(1); }
+  84% { transform: scale(1); }
+  94%, 100% { transform: scale(0); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.07); }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.hero-anim .edge {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-line 10s ease-in-out infinite;
+}
+
+.hero-anim .node {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  animation: pop-node 10s ease-out infinite;
+}
+
+.hero-anim .spark {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin-slow 24s linear infinite;
+}
+
+.hero-anim .core {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: breathe 4s ease-in-out infinite;
+}
+
+.hero-anim .orbit {
+  transform-box: view-box;
+  transform-origin: 200px 200px;
+  animation: spin-slow 40s linear infinite;
+}
+
+.hero-anim .star {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: twinkle 3.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .hero-anim *,
+  .rise-in,
+  .animate-pulse-glow {
+    animation: none !important;
+  }
+
+  .hero-anim .edge {
+    stroke-dashoffset: 0;
+  }
+
+  .hero-anim .node {
+    transform: none;
+  }
+
+  .hero-anim .pulse {
+    display: none;
+  }
 }
 
 @keyframes fadeIn {

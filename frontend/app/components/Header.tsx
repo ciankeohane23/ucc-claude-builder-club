@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
 import { useTheme } from "./ThemeProvider";
+import { JOIN_URL } from "../lib/site";
 
 const navLinks = [
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
   //{ label: "Team", href: "/team" },
   { label: "Events", href: "/events" },
@@ -16,98 +18,125 @@ const navLinks = [
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { theme, toggle } = useTheme();
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 bg-surface">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-8 sm:py-2.5 md:px-12">
-        <Link href="/" className="group flex items-center gap-1.5 sm:gap-2">
-  <Image
-  src="/images/claude_logo.svg"
-  alt="Claude logo"
-  width={28}
-  height={28}
-  className="h-5 w-5 transition-transform duration-300 ease-out group-hover:rotate-12 sm:h-6 sm:w-6 md:h-7 md:w-7"
-/>
-          <div className="flex flex-col leading-tight">
-            <span className="font-sans text-xs font-bold tracking-tight text-foreground sm:text-sm md:text-base">
-              University College Cork
-            </span>
-            <span className="text-[10px] font-semibold tracking-wide text-primary sm:text-xs md:text-sm">
-              Claude Builders Club
-            </span>
-          </div>
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled || mobileMenuOpen
+          ? "border-b border-foreground/10 bg-background/80 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent"
+      }`}
+    >
+      <div className="container-wide flex h-16 items-center justify-between gap-4 sm:h-[72px]">
+        <Link href="/" className="group flex shrink-0 items-center gap-2.5">
+          <Image
+            src="/images/claude_logo.svg"
+            alt=""
+            width={28}
+            height={28}
+            className="h-6 w-6 transition-transform duration-500 ease-out group-hover:rotate-45"
+          />
+          <span className="font-display text-lg font-semibold tracking-tight text-foreground">
+            Claude Builders Club
+          </span>
+          <span className="hidden text-sm text-foreground/70 sm:inline">UCC</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden items-center gap-6 text-sm font-medium text-foreground/70 md:flex lg:gap-8 lg:text-base">
+        <nav className="hidden items-center gap-7 text-[15px] text-foreground/80 lg:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="group relative transition-colors hover:text-primary"
+              className="transition-colors hover:text-primary"
             >
               {link.label}
-              <span className="absolute bottom-0 left-0 h-0.5 w-0 bg-primary transition-all duration-300 ease-out group-hover:w-full" />
             </Link>
           ))}
+        </nav>
+
+        <div className="hidden items-center gap-3 lg:flex">
           <button
             onClick={toggle}
-            className="flex h-8 w-8 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-cream hover:text-foreground"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground"
             aria-label="Toggle dark mode"
           >
             {theme === "dark" ? <FaSun className="h-4 w-4" /> : <FaMoon className="h-4 w-4" />}
           </button>
-        </nav>
+          <a
+            href="/#assistant"
+            className="inline-flex h-10 items-center rounded-lg border border-primary/40 px-4 text-[15px] text-foreground transition-colors hover:border-primary hover:bg-primary/5"
+          >
+            Ask the Assistant
+          </a>
+          <a
+            href={JOIN_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex h-10 items-center rounded-lg bg-foreground px-4 text-[15px] font-medium text-background transition-opacity hover:opacity-90"
+          >
+            Join the Club
+          </a>
+        </div>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-1 md:hidden">
+        {/* Mobile Menu Buttons */}
+        <div className="flex items-center gap-1 lg:hidden">
           <button
             onClick={toggle}
-            className="flex h-10 w-10 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-cream hover:text-foreground"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground"
             aria-label="Toggle dark mode"
           >
             {theme === "dark" ? <FaSun className="h-4 w-4" /> : <FaMoon className="h-4 w-4" />}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="flex h-10 w-10 items-center justify-center rounded-md text-foreground/70 transition-colors hover:bg-cream hover:text-foreground"
+            className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground"
             aria-label="Toggle menu"
+            aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? (
-              <FaTimes className="h-5 w-5" />
-            ) : (
-              <FaBars className="h-5 w-5" />
-            )}
+            {mobileMenuOpen ? <FaTimes className="h-5 w-5" /> : <FaBars className="h-5 w-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Navigation Menu */}
       <div
-        className={`grid transition-all duration-300 ease-in-out md:hidden ${
+        className={`grid transition-all duration-300 ease-in-out lg:hidden ${
           mobileMenuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
         }`}
       >
         <div className="overflow-hidden">
-          <div className="border-t border-muted/20 bg-surface px-4 pb-4">
-            <nav className="flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="rounded-md px-4 py-3 text-base font-medium text-foreground/70 transition-colors hover:bg-cream hover:text-primary"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
+          <nav className="container-wide flex flex-col gap-1 pb-5">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileMenuOpen(false)}
+                className="rounded-lg px-3 py-3 text-base text-foreground/80 transition-colors hover:bg-foreground/5 hover:text-primary"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <a
+              href={JOIN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-2 inline-flex h-12 items-center justify-center rounded-full bg-foreground text-base font-medium text-background"
+            >
+              Join the Club
+            </a>
+          </nav>
         </div>
       </div>
-
-      <div className="h-[1.5px] w-full bg-primary" />
     </header>
   );
 }

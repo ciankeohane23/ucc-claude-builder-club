@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
-import { Source_Serif_4 } from "next/font/google";
+import { Lora, Source_Serif_4 } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import ThemeProvider from "./components/ThemeProvider";
 import "./globals.css";
 
 const sourceSerif = Source_Serif_4({
   variable: "--font-serif",
+  subsets: ["latin"],
+});
+
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
 });
 
@@ -32,7 +37,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${sourceSerif.variable} antialiased`}>
+      <body className={`${sourceSerif.variable} ${lora.variable} antialiased`}>
         <ThemeProvider>
           {children}
         </ThemeProvider>
