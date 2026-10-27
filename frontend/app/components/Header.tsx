@@ -45,10 +45,12 @@ export default function Header() {
             height={28}
             className="h-6 w-6 transition-transform duration-500 ease-out group-hover:rotate-45"
           />
-          <span className="font-display text-lg font-semibold tracking-tight text-foreground">
-            Claude Builders Club
+          <span className="flex flex-col leading-tight">
+            <span className="font-display text-lg font-semibold tracking-tight text-foreground">
+              Claude Builders Club
+            </span>
+            <span className="text-xs tracking-wide text-foreground/70">University College Cork</span>
           </span>
-          <span className="hidden text-sm text-foreground/70 sm:inline">UCC</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -69,7 +71,7 @@ export default function Header() {
           <ThemeMenu />
           <Link
             href="/#assistant"
-            className="inline-flex h-10 items-center rounded-lg border border-primary/40 px-4 text-[15px] text-foreground transition-colors hover:border-primary hover:bg-primary/5"
+            className="hidden h-10 items-center whitespace-nowrap rounded-lg border border-primary/40 px-4 xl:inline-flex text-[15px] text-foreground transition-colors hover:border-primary hover:bg-primary/5"
           >
             Ask the Assistant
           </Link>
@@ -77,7 +79,7 @@ export default function Header() {
             href={JOIN_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex h-10 items-center rounded-lg bg-foreground px-4 text-[15px] font-medium text-background transition-opacity hover:opacity-90"
+            className="inline-flex h-10 items-center whitespace-nowrap rounded-lg bg-foreground px-4 text-[15px] font-medium text-background transition-opacity hover:opacity-90"
           >
             Join the Club
           </a>
