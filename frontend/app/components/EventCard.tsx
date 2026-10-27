@@ -82,6 +82,11 @@ export function UpcomingEventCard({ event }: { event: CalendarEvent }) {
               Featured
             </li>
           )}
+          {event.tags?.map((tag) => (
+            <li key={tag} className="rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+              {tag}
+            </li>
+          ))}
         </ul>
       </div>
       <div className="flex flex-col justify-center gap-3 p-6 pt-0 lg:w-80 lg:p-8">

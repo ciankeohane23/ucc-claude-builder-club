@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { fetchCalendarEvents, CalendarEvent } from "./calendar";
+import { MANUAL_EVENTS } from "./manualEvents";
 
-// Loads the club calendar once and splits it into upcoming (soonest first)
-// and past (most recent first) events
+// Loads the club calendar once, adds the hand-listed events, and splits them
+// into upcoming (soonest first) and past (most recent first) events
 export function useCalendarEvents() {
   const [state, setState] = useState<{
     upcoming: CalendarEvent[];
@@ -17,7 +18,7 @@ export function useCalendarEvents() {
     fetchCalendarEvents().then(({ events, error }) => {
       const startOfToday = new Date();
       startOfToday.setHours(0, 0, 0, 0);
-      const byDate = [...events].sort((a, b) => a.date.getTime() - b.date.getTime());
+      const byDate = [...events, ...MANUAL_EVENTS].sort((a, b) => a.date.getTime() - b.date.getTime());
       setState({
         upcoming: byDate.filter((e) => e.date >= startOfToday),
         past: byDate.filter((e) => e.date < startOfToday).reverse(),
