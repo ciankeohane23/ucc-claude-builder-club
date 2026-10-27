@@ -2,18 +2,13 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import {
   FaInstagram,
-  FaSlack,
-  FaDiscord,
-  FaLinkedin,
   FaEnvelope,
   FaFileAlt,
   FaExternalLinkAlt,
   FaCalendarAlt,
   FaUsers,
-  FaGithub,
-  FaTwitter,
-  FaYoutube,
-  FaLink,
+  FaHandshake,
+  FaTools,
 } from "react-icons/fa";
 import { IconType } from "react-icons";
 
@@ -56,6 +51,24 @@ const LINKS: LinkItem[] = [
     category: "resource",
   },
   {
+    id: "build",
+    title: "Guides & Workshops",
+    description: "Learn to build with Claude",
+    url: "/build",
+    icon: FaTools,
+    visible: true,
+    category: "resource",
+  },
+  {
+    id: "partnership",
+    title: "Partner With Us",
+    description: "For companies and organisations",
+    url: "/partnership",
+    icon: FaHandshake,
+    visible: true,
+    category: "community",
+  },
+  {
     id: "instagram",
     title: "Instagram",
     description: "Follow us for updates and behind-the-scenes",
@@ -84,7 +97,7 @@ const ARCHIVED_LINKS: LinkItem[] = [
   // Example archived link:
   // {
   //   id: "old-form",
-  //   title: "Fall 2025 Sign-Up",
+  //   title: "2025/26 Sign-Up",
   //   description: "No longer active",
   //   url: "https://old-form-url.com",
   //   icon: FaFileAlt,

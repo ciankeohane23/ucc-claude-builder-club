@@ -2,6 +2,7 @@ import Reveal from "./Reveal";
 import SectionHeading from "./SectionHeading";
 
 const images = [
+  { src: "/images/club-stand.jpg", alt: "Club members at the Claude stand on campus" },
   { src: "/images/claudeimg2.jpg", alt: "General meeting" },
   { src: "/images/claudeimg3.jpg", alt: "Hackathon winners" },
   { src: "/images/claudeimg5.jpg", alt: "Club stand"},

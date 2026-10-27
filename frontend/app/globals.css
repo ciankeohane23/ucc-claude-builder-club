@@ -207,6 +207,59 @@ h3 {
   animation: twinkle 3.2s ease-in-out infinite;
 }
 
+/* Build page animation (see components/BuildAnimation.tsx) */
+@keyframes drop-piece {
+  0% { transform: translateY(-260px); opacity: 0; }
+  6% { opacity: 1; }
+  14% { transform: translateY(0); }
+  17% { transform: translateY(-10px); }
+  20% { transform: translateY(0); }
+  86% { transform: translateY(0); opacity: 1; }
+  96%, 100% { transform: translateY(0); opacity: 0; }
+}
+
+@keyframes land-topper {
+  0% { transform: translateY(-120px) scale(0.4); opacity: 0; }
+  12% { transform: translateY(0) scale(1.15); opacity: 1; }
+  17% { transform: scale(1); }
+  80% { opacity: 1; }
+  92%, 100% { opacity: 0; }
+}
+
+@keyframes draw-ground {
+  0% { stroke-dashoffset: 1; }
+  10%, 90% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: 0; opacity: 0; }
+}
+
+.build-anim .ground {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-ground 9s ease-out infinite;
+}
+
+.build-anim .piece {
+  opacity: 0;
+  animation: drop-piece 9s cubic-bezier(0.3, 0.7, 0.3, 1) infinite;
+}
+
+.build-anim .topper {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: land-topper 9s ease-out infinite;
+}
+
+.build-anim .spark {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: spin-slow 14s linear infinite;
+}
+
+.build-anim .mark {
+  animation: twinkle 2.4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
@@ -215,6 +268,7 @@ h3 {
   }
 
   .hero-anim *,
+  .build-anim *,
   .rise-in,
   .animate-pulse-glow {
     animation: none !important;
@@ -224,8 +278,15 @@ h3 {
     stroke-dashoffset: 0;
   }
 
-  .hero-anim .node {
+  .hero-anim .node,
+  .build-anim .piece,
+  .build-anim .topper {
     transform: none;
+    opacity: 1;
+  }
+
+  .build-anim .ground {
+    stroke-dashoffset: 0;
   }
 
   .hero-anim .pulse {

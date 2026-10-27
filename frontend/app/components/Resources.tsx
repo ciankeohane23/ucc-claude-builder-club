@@ -10,12 +10,12 @@ const RESOURCES = [
   {
     title: "Claude Code",
     desc: "Claude as a coding partner in your terminal and editor",
-    href: "https://www.anthropic.com/claude-code",
+    href: "https://code.claude.com/docs/en/overview",
   },
   {
     title: "Claude Developer Docs",
     desc: "Everything you need to start building with the Claude API",
-    href: "https://docs.anthropic.com",
+    href: "https://platform.claude.com/docs",
   },
   {
     title: "Anthropic Research",
