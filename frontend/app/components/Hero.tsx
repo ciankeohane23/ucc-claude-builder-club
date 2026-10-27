@@ -20,16 +20,18 @@ export default function Hero() {
         <div className="min-w-0">
           <div className="rise-in">
             <h1 className="text-display font-semibold text-foreground">
-              Build with AI,
+              AI fluency
               <br />
-              <span className="text-primary">right here in Cork</span>
+              is the <em className="font-medium text-primary">skill of</em>
+              <br />
+              <em className="font-medium text-primary">this century.</em>
             </h1>
           </div>
 
           <div className="rise-in [animation-delay:120ms]">
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-foreground/75 sm:mt-8 sm:text-xl">
-              A student community at University College Cork learning, building and shipping real
-              projects with Claude, whatever your course or experience.
+              So we learn it the best way we know: by building. Workshops, tech talks and
+              hackathons with Claude for every UCC student, whatever your course or experience.
             </p>
           </div>
 
