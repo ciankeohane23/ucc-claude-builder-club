@@ -8,7 +8,7 @@ const ACTIVITIES = [
     title: "Workshops",
     desc: "Hands-on sessions where you learn to build with Claude, from your first prompt to a working app.",
     image: "/images/claude-icons/lightbulb.png",
-    href: "/events",
+    href: "/build",
   },
   {
     title: "Hackathons",

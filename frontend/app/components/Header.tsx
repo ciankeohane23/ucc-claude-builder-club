@@ -3,23 +3,23 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { FaBars, FaTimes, FaSun, FaMoon } from "react-icons/fa";
-import { useTheme } from "./ThemeProvider";
+import { usePathname } from "next/navigation";
+import { FaBars, FaTimes } from "react-icons/fa";
+import ThemeMenu from "./ThemeMenu";
 import { JOIN_URL } from "../lib/site";
 
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "About", href: "/about" },
-  //{ label: "Team", href: "/team" },
+  { label: "Build", href: "/build" },
   { label: "Events", href: "/events" },
-  //{ label: "Slides", href: "/slides" },
-  { label: "Links", href: "/links" },
+  { label: "Partnership", href: "/partnership" },
 ];
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { theme, toggle } = useTheme();
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -57,7 +57,8 @@ export default function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-primary"
+              className={`transition-colors hover:text-primary ${pathname === link.href ? "text-primary" : ""}`}
+              aria-current={pathname === link.href ? "page" : undefined}
             >
               {link.label}
             </Link>
@@ -65,19 +66,13 @@ export default function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <button
-            onClick={toggle}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground"
-            aria-label="Toggle dark mode"
-          >
-            {theme === "dark" ? <FaSun className="h-4 w-4" /> : <FaMoon className="h-4 w-4" />}
-          </button>
-          <a
+          <ThemeMenu />
+          <Link
             href="/#assistant"
             className="inline-flex h-10 items-center rounded-lg border border-primary/40 px-4 text-[15px] text-foreground transition-colors hover:border-primary hover:bg-primary/5"
           >
             Ask the Assistant
-          </a>
+          </Link>
           <a
             href={JOIN_URL}
             target="_blank"
@@ -90,13 +85,7 @@ export default function Header() {
 
         {/* Mobile Menu Buttons */}
         <div className="flex items-center gap-1 lg:hidden">
-          <button
-            onClick={toggle}
-            className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground"
-            aria-label="Toggle dark mode"
-          >
-            {theme === "dark" ? <FaSun className="h-4 w-4" /> : <FaMoon className="h-4 w-4" />}
-          </button>
+          <ThemeMenu />
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="flex h-10 w-10 items-center justify-center rounded-full text-foreground/70 transition-colors hover:bg-foreground/5 hover:text-foreground"

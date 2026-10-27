@@ -2,6 +2,8 @@
 // Google Calendar API Integration
 // ============================================================
 
+import { EVENT_EXTRAS } from "./eventExtras";
+
 export interface CalendarEvent {
   id: string;
   title: string;
@@ -12,6 +14,8 @@ export interface CalendarEvent {
   type: EventType;
   description: string;
   isFlagship: boolean;
+  image?: string;
+  link?: string;
 }
 
 export type EventType =
@@ -70,12 +74,12 @@ const COLOR_TO_TYPE: Record<string, EventType> = {
 // Keywords in title/description that indicate event type
 const TYPE_KEYWORDS: Record<EventType, string[]> = {
   meeting: ["meeting", "gm", "general meeting", "gm#", "general mtg"],
-  tabling: ["tabling", "table", "recruitment", "speedway"],
-  hackathon: ["hackathon", "hack", "buildathon", "claudehacks"],
+  tabling: ["tabling", "club stand", "clubs day", "societies day", "recruitment"],
+  hackathon: ["hackathon", "hack", "buildathon"],
   workshop: ["workshop", "tutorial", "hands-on", "learn", "intro to"],
   demo: ["demo", "showcase", "presentation", "show and tell"],
   social: ["social", "hangout", "mixer", "party", "networking"],
-  speaker: ["guest speaker", "speaker", "talk", "fireside", "keynote", "guest lecture"],
+  speaker: ["guest speaker", "speaker", "tech talk", "talk", "fireside", "keynote", "guest lecture"],
   other: [],
 };
 
@@ -85,7 +89,6 @@ const FLAGSHIP_KEYWORDS = [
   "featured",
   "main event",
   "hackathon",
-  "claudehacks",
   "★",
   "⭐",
 ];
@@ -124,11 +127,18 @@ function stripHtml(html: string): string {
 
 function formatTime(dateString: string): string {
   const date = new Date(dateString);
-  return date.toLocaleTimeString("en-US", {
+  return date.toLocaleTimeString("en-IE", {
     hour: "numeric",
     minute: "2-digit",
     hour12: true,
+    timeZone: "Europe/Dublin",
   });
+}
+
+// Calendar date of an event in Irish time, e.g. "2026-03-19"
+function dublinDateKey(dateString: string): string {
+  if (dateString.length === 10) return dateString; // all-day events are already a date
+  return new Date(dateString).toLocaleDateString("en-CA", { timeZone: "Europe/Dublin" });
 }
 
 function parseGoogleEvent(event: GoogleCalendarEvent): CalendarEvent {
@@ -138,7 +148,7 @@ function parseGoogleEvent(event: GoogleCalendarEvent): CalendarEvent {
 
   const isAllDay = !event.start.dateTime;
 
-  return {
+  const parsed: CalendarEvent = {
     id: event.id,
     title: event.summary || "Untitled Event",
     date: new Date(startDateTime),
@@ -146,8 +156,20 @@ function parseGoogleEvent(event: GoogleCalendarEvent): CalendarEvent {
     endTime: isAllDay ? "" : formatTime(endDateTime),
     location: event.location || "TBA",
     type: detectEventType(event),
-    description: event.description ? stripHtml(event.description) : "No description provided.",
+    description: event.description ? stripHtml(event.description) : "",
     isFlagship: detectIsFlagship(event),
+  };
+
+  // Layer on any hand-written details (poster, Instagram link, corrections)
+  const extras = EVENT_EXTRAS[dublinDateKey(startDateTime)];
+  if (!extras) return parsed;
+
+  return {
+    ...parsed,
+    ...extras,
+    date: extras.start ? new Date(extras.start) : parsed.date,
+    startTime: extras.start ? formatTime(extras.start) : parsed.startTime,
+    endTime: extras.end ? formatTime(extras.end) : parsed.endTime,
   };
 }
 
@@ -166,9 +188,9 @@ export async function fetchCalendarEvents(): Promise<{
     };
   }
 
-  // Fetch events from now onwards (or past month for testing)
+  // Fetch the last 18 months too, so the Events page can list past events
   const timeMin = new Date();
-  timeMin.setMonth(timeMin.getMonth() - 1); // Show events from past month too
+  timeMin.setMonth(timeMin.getMonth() - 18);
 
   const timeMax = new Date();
   timeMax.setMonth(timeMax.getMonth() + 6); // Show events up to 6 months ahead
@@ -179,7 +201,7 @@ export async function fetchCalendarEvents(): Promise<{
     timeMax: timeMax.toISOString(),
     singleEvents: "true",
     orderBy: "startTime",
-    maxResults: "50",
+    maxResults: "250",
   });
 
   const url = `https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(calendarId)}/events?${params}`;

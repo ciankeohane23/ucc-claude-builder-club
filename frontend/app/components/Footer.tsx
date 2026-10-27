@@ -6,8 +6,8 @@ const COLUMNS = [
   {
     title: "Build",
     links: [
+      { label: "Guides & Workshops", href: "/build" },
       { label: "Events", href: "/events" },
-      { label: "About the Club", href: "/about" },
       { label: "Claude", href: "https://claude.ai", external: true },
     ],
   },
@@ -15,6 +15,7 @@ const COLUMNS = [
     title: "Community",
     links: [
       { label: "Join the Club", href: JOIN_URL, external: true },
+      { label: "About the Club", href: "/about" },
       { label: "All Links", href: "/links" },
       { label: "Anthropic", href: "https://www.anthropic.com", external: true },
     ],
@@ -24,7 +25,7 @@ const COLUMNS = [
     links: [
       { label: "Email", href: `mailto:${CLUB_EMAIL}`, external: true },
       { label: "Instagram", href: INSTAGRAM_URL, external: true },
-      { label: "Partner With Us", href: `mailto:${CLUB_EMAIL}?subject=Partnering%20with%20the%20club`, external: true },
+      { label: "Partner With Us", href: "/partnership" },
     ],
   },
 ];
