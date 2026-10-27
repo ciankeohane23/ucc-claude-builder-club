@@ -32,9 +32,9 @@ const EVENTS: ManualEvent[] = [
     end: "2026-10-28T18:00:00+00:00",
     location: "Sustainable Futures Lab, Civil Engineering Building",
     description:
-      "Our first monthly meetup of the year. Come meet the club, hear what's planned for the year and start building with Claude. Everyone welcome, no experience needed. Everyone who comes gets a free month of Claude Pro.",
+      "Our first monthly meetup of the year. Come meet the club, hear what's planned for the year and start building with Claude. Everyone welcome, no experience needed. Everyone who comes gets 3 free months of Claude Pro.",
     type: "meeting",
-    tags: ["Free Claude Pro for a month"],
+    tags: ["3 months of free Claude Pro"],
   },
 ];
 
