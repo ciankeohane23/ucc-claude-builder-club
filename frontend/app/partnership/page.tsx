@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { FaArrowRight, FaBullhorn, FaUserGraduate } from "react-icons/fa";
+import { FaBullhorn, FaUserGraduate } from "react-icons/fa";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Reveal from "../components/Reveal";
 import CopyEmail from "../components/CopyEmail";
+import ContactButton from "../components/ContactButton";
 import { CLUB_EMAIL } from "../lib/site";
 
 export const metadata: Metadata = {
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
   description: "Partner with the UCC Claude Builders Club to reach students building with AI at University College Cork.",
 };
 
-const CONTACT_URL = `mailto:${CLUB_EMAIL}?subject=${encodeURIComponent("Partnering with the UCC Claude Builders Club")}`;
+const CONTACT_SUBJECT = "Partnering with the UCC Claude Builders Club";
 
 const BENEFITS = [
   {
@@ -60,16 +61,10 @@ export default function PartnershipPage() {
                 <BenefitCard benefit={BENEFITS[0]} />
               </Reveal>
 
-              <Reveal delay={150} className="flex flex-col items-center py-2 lg:flex-row">
+              <Reveal delay={150} className="relative z-20 flex flex-col items-center py-2 lg:flex-row">
                 <span aria-hidden className="hidden h-px w-12 bg-primary/60 lg:block xl:w-16" />
                 <span aria-hidden className="hidden h-2 w-2 rounded-full bg-primary lg:block" />
-                <a
-                  href={CONTACT_URL}
-                  className="group inline-flex h-12 items-center justify-center gap-2 rounded-full bg-primary px-7 font-medium text-white shadow-lift transition-all duration-300 hover:bg-primary-dark hover:shadow-lift-lg lg:mx-3"
-                >
-                  Get in Touch
-                  <FaArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                </a>
+                <ContactButton email={CLUB_EMAIL} subject={CONTACT_SUBJECT} />
                 <span aria-hidden className="hidden h-2 w-2 rounded-full bg-primary lg:block" />
                 <span aria-hidden className="hidden h-px w-12 bg-primary/60 lg:block xl:w-16" />
               </Reveal>
