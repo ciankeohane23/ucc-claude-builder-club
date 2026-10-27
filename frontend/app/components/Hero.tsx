@@ -30,7 +30,7 @@ export default function Hero() {
 
           <div className="rise-in [animation-delay:120ms]">
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-foreground/75 sm:mt-8 sm:text-xl">
-              So we learn it the best way we know: by building. Workshops, tech talks and
+              So we learn it the best way we know, by building. Workshops, tech talks and
               hackathons with Claude for every UCC student, whatever your course or experience.
             </p>
           </div>
