@@ -1,9 +1,12 @@
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import Form from "./components/Form";
+import NextEvent from "./components/NextEvent";
+import WhatWeDo from "./components/WhatWeDo";
+import WhyJoin from "./components/WhyJoin";
 import Gallery from "./components/Gallery";
-import Outreach from "./components/Outreach";
 import Chatbot from "./components/Chatbot";
+import Resources from "./components/Resources";
+import CallToAction from "./components/CallToAction";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -12,17 +15,13 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Form />
+        <NextEvent />
+        <WhatWeDo />
+        <WhyJoin />
         <Gallery />
-        <Outreach />
         <Chatbot />
-        <section className="bg-primary px-[8%] py-16 sm:py-20 md:py-28">
-          <p className="text-center text-5xl font-light leading-tight text-cream sm:text-6xl md:text-left md:text-7xl lg:text-8xl">
-            Keep
-            <br />
-            thinking.
-          </p>
-        </section>
+        <Resources />
+        <CallToAction />
       </main>
       <Footer />
     </>

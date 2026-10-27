@@ -25,10 +25,12 @@ export default function Chatbot() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const windowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Scroll only the message window, so the page itself doesn't jump here on load
+    const el = windowRef.current;
+    if (el) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   }, [messages, loading]);
 
   async function send(text: string) {
@@ -62,20 +64,20 @@ export default function Chatbot() {
   }
 
   return (
-    <section className="bg-cream px-[8%] py-16 sm:py-20 md:py-28">
-      <div className="mx-auto max-w-2xl">
+    <section id="assistant" className="scroll-mt-24 bg-cream py-16 sm:py-24">
+      <div className="container-wide max-w-2xl">
         <div className="mb-6 flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary text-white">
             <FaRobot className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-foreground sm:text-2xl">Ask the Club Assistant</h2>
-            <p className="text-sm text-muted">Powered by Claude</p>
+            <h2 className="text-2xl font-semibold text-foreground sm:text-3xl">Ask the Club Assistant</h2>
+            <p className="text-sm text-foreground/60">Powered by Claude</p>
           </div>
         </div>
 
         {/* Message window */}
-        <div className="flex h-80 flex-col gap-3 overflow-y-auto rounded-xl border border-muted/20 bg-surface p-4 shadow-sm">
+        <div ref={windowRef} className="flex h-80 flex-col gap-3 overflow-y-auto rounded-2xl border border-kraft bg-surface p-4 shadow-lift">
           {messages.map((msg, i) => (
             <div
               key={i}
@@ -107,7 +109,6 @@ export default function Chatbot() {
             <p className="text-center text-xs text-red-500">{error}</p>
           )}
 
-          <div ref={bottomRef} />
         </div>
 
         {/* Suggestion chips */}
@@ -117,7 +118,7 @@ export default function Chatbot() {
               <button
                 key={s}
                 onClick={() => send(s)}
-                className="rounded-full border border-muted/30 bg-surface px-3 py-1.5 text-xs text-foreground/70 transition-colors hover:border-primary hover:text-primary"
+                className="rounded-full border border-kraft bg-surface px-3 py-1.5 text-xs text-foreground/70 transition-colors hover:border-primary hover:text-primary"
               >
                 {s}
               </button>
@@ -136,12 +137,12 @@ export default function Chatbot() {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask something..."
             maxLength={500}
-            className="flex-1 rounded-xl border border-muted/30 bg-surface px-4 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-primary focus:outline-none"
+            className="flex-1 rounded-full border border-kraft bg-surface px-5 py-2.5 text-sm text-foreground placeholder:text-muted focus:border-primary focus:outline-none"
           />
           <button
             type="submit"
             disabled={!input.trim() || loading}
-            className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white transition-colors hover:bg-primary-dark disabled:opacity-40"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-primary text-white transition-colors hover:bg-primary-dark disabled:opacity-40"
             aria-label="Send"
           >
             <FaPaperPlane className="h-4 w-4" />
